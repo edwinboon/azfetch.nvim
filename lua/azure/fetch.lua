@@ -19,7 +19,7 @@ function M.fetch_app_settings(decrypt)
 	-- Construct the Azure CLI command to fetch app settings
 	local cmd = "az functionapp config appsettings list --name "
 		.. app_name
-		.. " --query '[].{name:name, value:value}' -o json"
+		.. " --resource-group "
 		.. resource_group
 		.. " --query '[].{name:name, value:value}' -o json"
 
