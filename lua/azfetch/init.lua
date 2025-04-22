@@ -1,7 +1,7 @@
 local M = {}
 
 -- Plugin version
-M.version = "0.0.1"
+M.version = "0.0.2"
 
 -- Default options
 M.options = {
