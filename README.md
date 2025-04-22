@@ -7,6 +7,7 @@ A Neovim plugin to fetch and optionally decrypt Azure Function App settings.
 - Fetch settings from an Azure Function App.
 - Optionally decrypt the settings after fetching.
 - Configurable keybindings.
+- Built-in versioning (`azfetch.get_version()`).
 
 ## Prerequisites
 
@@ -34,6 +35,7 @@ Before using this plugin, make sure you have the following tools installed and c
 require("lazy").setup({
     {
         "yourusername/azfetch.nvim", -- Replace with your GitHub repository URL
+        version = "0.0.1", -- Pin to version 0.0.1
         config = function()
             require("azfetch").setup({
                 decrypt = true, -- Set to `false` if you don't want to decrypt
@@ -49,6 +51,7 @@ require("lazy").setup({
 ```lua
 use {
     "yourusername/azfetch.nvim", -- Replace with your GitHub repository URL
+    tag = "0.0.1", -- Pin to version 0.0.1
     config = function()
         require("azfetch").setup({
             decrypt = true, -- Set to `false` if you don't want to decrypt
@@ -88,6 +91,16 @@ require("azfetch").setup({
 
 ---
 
+## Versioning
+
+This plugin uses [Semantic Versioning](https://semver.org/). You can check the current version by calling:
+
+```lua
+require("azfetch").get_version()
+```
+
+---
+
 ## License
 
-This plugin is licensed under the MIT License.
+This plugin is licensed under the MIT License. See [LICENSE](LICENSE) for details.

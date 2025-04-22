@@ -1,5 +1,8 @@
 local M = {}
 
+-- Plugin version
+M.version = "0.0.1"
+
 -- Default options
 M.options = {
 	decrypt = false, -- Optional decryption
@@ -54,6 +57,11 @@ function M.setup(options)
 			{ noremap = true, silent = true }
 		)
 	end
+end
+
+-- Function to get the plugin version
+function M.get_version()
+	print("azfetch.nvim version: " .. M.version)
 end
 
 return M
