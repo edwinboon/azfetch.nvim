@@ -6,6 +6,7 @@ A Neovim plugin to fetch and optionally decrypt Azure Function App settings dire
 
 - Fetch settings from an Azure Function App.
 - Optionally decrypt the settings after fetching.
+- Dynamic resource group handling for each fetch operation.
 - Configurable keybindings and commands.
 
 ---
@@ -32,7 +33,7 @@ You can install `azure.nvim` using your favorite plugin manager. Here's how:
 ```lua
 require("lazy").setup({
     {
-        "edwinboon/azure.nvim",
+        "edwinboon/azure.nvim", -- Replace with your GitHub repository URL
         version = "v0.1.0", -- Pin to a specific version
         config = function()
             require("azure").setup({
@@ -50,7 +51,7 @@ require("lazy").setup({
 
 ```lua
 use {
-    "edwinboon/azure.nvim",
+    "edwinboon/azure.nvim", -- Replace with your GitHub repository URL
     tag = "v0.1.0", -- Pin to a specific version
     config = function()
         require("azure").setup({
@@ -71,6 +72,7 @@ use {
 
    - Press the configured keybinding (default: `<leader>af`) in normal mode.
    - Enter the name of the Azure Function App when prompted.
+   - Enter the name of the Azure Resource Group when prompted.
    - The settings will be fetched, and optionally decrypted if `decrypt` is enabled.
 
 2. **Command**:

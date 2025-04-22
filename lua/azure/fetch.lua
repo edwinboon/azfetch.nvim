@@ -9,9 +9,18 @@ function M.fetch_app_settings(decrypt)
 		return
 	end
 
+	-- Prompt the user for the Azure Function App resource group
+	local resource_group = vim.fn.input("Enter Azure Function App resource group: ")
+	if resource_group == "" then
+		print("Resource group cannot be empty!")
+		return
+	end
+
 	-- Construct the Azure CLI command to fetch app settings
 	local cmd = "az functionapp config appsettings list --name "
 		.. app_name
+		.. " --query '[].{name:name, value:value}' -o json"
+		.. resource_group
 		.. " --query '[].{name:name, value:value}' -o json"
 
 	-- Execute the command and capture the output
