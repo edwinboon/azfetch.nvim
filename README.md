@@ -1,45 +1,45 @@
-# azfetch.nvim
+# azure.nvim
 
-A Neovim plugin to fetch and optionally decrypt Azure Function App settings.
+A Neovim plugin to fetch and optionally decrypt Azure Function App settings directly from your editor.
 
 ## Features
 
 - Fetch settings from an Azure Function App.
 - Optionally decrypt the settings after fetching.
-- Configurable keybindings.
-- Built-in versioning (`azfetch.get_version()`).
+- Configurable keybindings and commands.
+
+---
 
 ## Prerequisites
 
 Before using this plugin, make sure you have the following tools installed and configured:
 
-1. **[Azure Functions Core Tools](https://docs.microsoft.com/nl-nl/azure/azure-functions/functions-run-local?tabs=v4%2Cmacos%2Ccsharp%2Cportal%2Cbash)**:
-
-   - This is required to fetch and decrypt Azure Function App settings.
-
-2. **[Azure CLI](https://docs.microsoft.com/nl-nl/cli/azure/)**:
-
-   - You need to be logged in to Azure using `az login` before using this plugin.
-
-   ```bash
-   az login
-   ```
+1. **[Azure CLI](https://learn.microsoft.com/en-us/cli/azure/):**
+   - Required for fetching and decrypting Azure Function App settings.
+   - Ensure you are logged in using `az login`:
+     ```bash
+     az login
+     ```
 
 ---
 
 ## Installation
+
+You can install `azure.nvim` using your favorite plugin manager. Here's how:
 
 ### Using [lazy.nvim](https://github.com/folke/lazy.nvim):
 
 ```lua
 require("lazy").setup({
     {
-        "edwinboon/azfetch.nvim", -- Replace with your GitHub repository URL
-        version = "0.0.3", -- Pin to version 0.0.1
+        "edwinboon/azure.nvim",
+        version = "v0.1.0", -- Pin to a specific version
         config = function()
-            require("azfetch").setup({
-                decrypt = true, -- Set to `false` if you don't want to decrypt
-                keymap = "<leader>af", -- Custom keymap
+            require("azure").setup({
+                decrypt = true, -- Enable decryption
+                keymaps = {
+                    fetch_app_settings = "<leader>af", -- Custom keybinding for fetching app settings
+                },
             })
         end,
     },
@@ -50,12 +50,14 @@ require("lazy").setup({
 
 ```lua
 use {
-    "edwinboon/azfetch.nvim", -- Replace with your GitHub repository URL
-    tag = "0.0.3", -- Pin to version 0.0.1
+    "edwinboon/azure.nvim",
+    tag = "v0.1.0", -- Pin to a specific version
     config = function()
-        require("azfetch").setup({
-            decrypt = true, -- Set to `false` if you don't want to decrypt
-            keymap = "<leader>af", -- Custom keymap
+        require("azure").setup({
+            decrypt = true, -- Enable decryption
+            keymaps = {
+                fetch_app_settings = "<leader>af", -- Custom keybinding for fetching app settings
+            },
         })
     end,
 }
@@ -65,39 +67,49 @@ use {
 
 ## Usage
 
-1. Press the configured keybinding (default: `<leader>az`) in normal mode.
-2. Enter the name of the Azure Function App when prompted.
-3. The settings will be fetched, and optionally decrypted if `decrypt` is enabled.
+1. **Keybinding**:
+
+   - Press the configured keybinding (default: `<leader>af`) in normal mode.
+   - Enter the name of the Azure Function App when prompted.
+   - The settings will be fetched, and optionally decrypted if `decrypt` is enabled.
+
+2. **Command**:
+   - Alternatively, you can use the command `:AzFetchAppSettings` to fetch the settings.
+   - This is useful if you prefer not to use keybindings.
 
 ---
 
 ## Configuration Options
 
-| Option    | Type    | Default      | Description                                 |
-| --------- | ------- | ------------ | ------------------------------------------- |
-| `decrypt` | boolean | `false`      | Whether to decrypt settings after fetching. |
-| `keymap`  | string  | `<leader>az` | Keybinding to trigger the fetch action.     |
+| Option    | Type    | Default | Description                                       |
+| --------- | ------- | ------- | ------------------------------------------------- |
+| `decrypt` | boolean | `false` | Whether to decrypt settings after fetching.       |
+| `keymaps` | table   | `{}`    | Table of keybindings for specific plugin actions. |
+
+### Keymaps Table
+
+The `keymaps` table allows you to define custom keybindings for specific plugin functions:
+
+| Key                  | Description                                              |
+| -------------------- | -------------------------------------------------------- |
+| `fetch_app_settings` | Keybinding to fetch and optionally decrypt app settings. |
 
 ---
 
 ## Example Configuration
 
+Here's a sample configuration for your `init.lua`:
+
 ```lua
-require("azfetch").setup({
+require("azure").setup({
     decrypt = true, -- Enable decryption after fetching
-    keymap = "<leader>af", -- Set a custom keybinding
+    keymaps = {
+        fetch_app_settings = "<leader>af", -- Set a custom keybinding for fetching app settings
+    },
 })
 ```
 
----
-
-## Versioning
-
-This plugin uses [Semantic Versioning](https://semver.org/). You can check the current version by calling:
-
-```lua
-require("azfetch").get_version()
-```
+If you prefer using commands, you can skip the `keymaps` option and use `:AzFetchAppSettings` instead.
 
 ---
 

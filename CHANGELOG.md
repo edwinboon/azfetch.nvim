@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.0] - 2025-04-22
+
+### Changed
+
+- Renamed the plugin from `azfetch` to `azure` since it is now a general-purpose plugin for Azure.
+- Added the fetch app settings functionality in a seperate lua file.
+- Improved the README.md to provide better instructions on how to use the plugin.
+
 ## [0.0.3] - 2025-04-22
 
 ### Changed
