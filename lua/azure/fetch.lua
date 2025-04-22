@@ -58,6 +58,44 @@ function M.fetch_app_settings(decrypt)
 			end
 		end
 	end
+
+	-- Convert to local.settings.json format
+	local local_settings = {
+		IsEncrypted = false,
+		Values = {},
+	}
+
+	-- Add each setting to the Values object
+	for _, setting in ipairs(settings) do
+		local_settings.Values[setting.name] = setting.value
+	end
+
+	-- Get the current working directory
+	local cwd = vim.fn.getcwd()
+	local output_file = cwd .. "/local.settings.json"
+
+	-- Convert back to JSON with pretty formatting
+	local json_str = vim.fn.json_encode(local_settings)
+
+	-- Pretty print JSON (optional)
+	-- This creates better formatted JSON with indentation
+	if vim.fn.has("nvim-0.7") == 1 then
+		-- For Neovim 0.7+ use the built-in JSON formatting
+		json_str = vim.json.encode(local_settings, { indent = 2 })
+	end
+
+	-- Write to file
+	local file = io.open(output_file, "w")
+	if file then
+		file:write(json_str)
+		file:close()
+		print("Settings saved to " .. output_file)
+
+		-- Optionally open the file in a new buffer
+		vim.cmd("edit " .. output_file)
+	else
+		print("Failed to write settings to file")
+	end
 end
 
 return M
