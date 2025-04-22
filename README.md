@@ -34,8 +34,8 @@ Before using this plugin, make sure you have the following tools installed and c
 ```lua
 require("lazy").setup({
     {
-        "yourusername/azfetch.nvim", -- Replace with your GitHub repository URL
-        version = "0.0.1", -- Pin to version 0.0.1
+        "edwinboon/azfetch.nvim", -- Replace with your GitHub repository URL
+        version = "0.0.3", -- Pin to version 0.0.1
         config = function()
             require("azfetch").setup({
                 decrypt = true, -- Set to `false` if you don't want to decrypt
@@ -50,8 +50,8 @@ require("lazy").setup({
 
 ```lua
 use {
-    "yourusername/azfetch.nvim", -- Replace with your GitHub repository URL
-    tag = "0.0.1", -- Pin to version 0.0.1
+    "edwinboon/azfetch.nvim", -- Replace with your GitHub repository URL
+    tag = "0.0.3", -- Pin to version 0.0.1
     config = function()
         require("azfetch").setup({
             decrypt = true, -- Set to `false` if you don't want to decrypt
